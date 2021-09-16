@@ -2,9 +2,7 @@
 
 Created a responsive web app in React that enables users to nominate their 5 favourite movies for The Shoppies!
 
-![example of page](./readme_assets/modified.PNG)
-
-# Hosted at (https://prashkethshopify.netlify.app/)
+# Hosted at (https://prashkethnasa.netlify.app/)
 
 ## Table of Contents
 
@@ -16,16 +14,14 @@ Created a responsive web app in React that enables users to nominate their 5 fav
 
 ## Challenge
 
-Create a webpage that can search [OMDB](http://www.omdbapi.com) for movies, and allow the user to save their favourite films they feel should be up for nomination. When they've selected 5 nominees they should be notified they're finished
+For the purposes of this project, Shopify is extending our mission to Make Commerce Better for Everyone to include the whole entire universe. Please build us an app to help share photos from one of NASA’s image APIs.
 
 ### Technical Requirements
 
-- Search results should come from OMDB's API
-- Each search result should list at least its title, year of release and a button to nominate that film.
-- Updates to the search terms should update the result list
-- Movies in search results can be added and removed from the nomination list.
-- If a search result has already been nominated, disable its nominate button.
-- Display a banner when the user has 5 nominations.
+- Fetch data from one of NASA’s APIs and display the resulting images
+- Display descriptive data for each image (for example: title, date, description, etc.)
+- Like an image
+- Unlike an image
 
 ### Extras
 
@@ -47,15 +43,6 @@ Improvements to design and functionality are allowed to be added in order to hig
 ## Features
 
 - Designed application to be responsive and functional (Mobile + Desktop)
-
-![mobile view](./readme_assets/mobile.PNG)
-
-- Added pop-up banner for mobile view that occurs when 5 movies have been nominated
-- Added ability to save nominations for later (appears after at least 1 movie has been nominated)
-- Users are able to submit nominations once 5 movies have been selected
-
-![submit nominations](./readme_assets/limit.PNG)
-
-- Added loading wheel that appears briefly after each search request
+- Added loading animation that appears briefly after each search request
 - Users are able to limit the amount of search results that are shown
-- Users can view more information about a title by clicking the 'More info >' link for each movie
+- Users are able to save liked images for later (can leave page and comeback to see liked images from before)
