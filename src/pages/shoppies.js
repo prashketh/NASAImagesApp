@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import SearchBox from '../components/searchbox'
-import Nominations from '../components/nominations'
+import Likes from '../components/likes'
 import Results from '../components/results'
 import {
 	Container,
@@ -58,12 +58,11 @@ const useStyles = makeStyles((theme) => ({
 		width: '100%',
 		backgroundColor: '#e59892',
 	},
-	nominationsContainer: {
+	likesContainer: {
 		borderRadius: 6,
 		width: '100%',
 		backgroundColor: '#e59892',
 		marginTop: theme.spacing(2),
-		// color: 'white',
 		[theme.breakpoints.up('md')]: {
 			marginLeft: theme.spacing(2),
 			marginTop: theme.spacing(9),
@@ -96,40 +95,43 @@ export default function Shoppies({ ...props }) {
 	const classes = useStyles(props)
 
 	const [images, setImages] = useState([])
-	const [nominations, setNominations] = useState([])
+	const [likes, setLikes] = useState([])
 	const [loading, setLoading] = useState(false)
 	const [saveForLater, setSaveForLater] = useState(false)
 
 	const checkIfIDExists = (image) => {
-		return nominations.some(
-			(item) => item.data[0].nasa_id === image.data[0].nasa_id
-		)
+		return likes.some((item) => item.data[0].nasa_id === image.data[0].nasa_id)
 	}
 
-	const addNomination = (movie) => {
+	const addLike = (movie) => {
 		if (!checkIfIDExists(movie)) {
-			setNominations(nominations.concat(movie))
+			setLikes(likes.concat(movie))
 		}
 	}
 
-	const removeNomination = (image) => {
-		setNominations(
-			nominations.filter(
-				(item) => item.data[0].nasa_id !== image.data[0].nasa_id
+	const removeLike = (image) => {
+		if (likes.length == 1) {
+			setLikes(
+				likes.filter((item) => item.data[0].nasa_id !== image.data[0].nasa_id)
 			)
-		)
+			window.localStorage.clear()
+		} else {
+			setLikes(
+				likes.filter((item) => item.data[0].nasa_id !== image.data[0].nasa_id)
+			)
+		}
 	}
 
 	useEffect(() => {
 		if (images.length > 0) {
-			window.localStorage.setItem('nominations', JSON.stringify(nominations))
+			window.localStorage.setItem('likes', JSON.stringify(likes))
 			setSaveForLater(false)
 		}
 	}, [saveForLater])
 
 	useEffect(() => {
-		if (window.localStorage.getItem('nominations')) {
-			setNominations(JSON.parse(window.localStorage.getItem('nominations')))
+		if (window.localStorage.getItem('likes')) {
+			setLikes(JSON.parse(window.localStorage.getItem('likes')))
 		}
 		setImages([0])
 	}, [])
@@ -162,7 +164,7 @@ export default function Shoppies({ ...props }) {
 					<Grid item xs={12} className={classes.resultsContainer}>
 						<Results
 							images={images}
-							onAdd={addNomination}
+							onAdd={addLike}
 							checkIfIDExists={checkIfIDExists}
 							loading={loading}
 						/>
@@ -170,10 +172,10 @@ export default function Shoppies({ ...props }) {
 				</Grid>
 				<Grid item container xs={12} md={6}>
 					<Grid item xs={12}>
-						<Box className={classes.nominationsContainer}>
-							<Nominations
-								onRemove={removeNomination}
-								images={nominations}
+						<Box className={classes.likesContainer}>
+							<Likes
+								onRemove={removeLike}
+								images={likes}
 								setSaveForLater={setSaveForLater}
 							/>
 						</Box>

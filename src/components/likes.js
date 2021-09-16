@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 		width: 30,
 		color: 'black',
 	},
-	noNominations: {
+	noLikes: {
 		display: 'flex',
 		margin: theme.spacing(1),
 		padding: theme.spacing(1),
@@ -57,10 +57,10 @@ const useStyles = makeStyles((theme) => ({
 	},
 }))
 
-const _renderResults = (images, removeNomination) => {
+const _renderResults = (images, removeLike) => {
 	const classes = useStyles()
 	if (images.length < 1) {
-		return <Card className={classes.noNominations}>Like some pictures!</Card>
+		return <Card className={classes.noLikes}>Like some pictures!</Card>
 	} else {
 		return images.map((image, i) => (
 			<Card className={classes.resultRoot} key={i}>
@@ -74,7 +74,7 @@ const _renderResults = (images, removeNomination) => {
 						</Typography>
 					</CardContent>
 					<div className={classes.controls}>
-						<IconButton onClick={() => removeNomination(image)}>
+						<IconButton onClick={() => removeLike(image)}>
 							<NotInterestedOutlined className={classes.removeIcon} />
 						</IconButton>
 					</div>
@@ -89,15 +89,10 @@ const _renderResults = (images, removeNomination) => {
 	}
 }
 
-export default function Nominations({
-	images,
-	onRemove,
-	setSaveForLater,
-	...props
-}) {
+export default function Likes({ images, onRemove, setSaveForLater, ...props }) {
 	const classes = useStyles(props)
 
-	const removeNomination = (movie) => {
+	const removeLike = (movie) => {
 		onRemove(movie)
 	}
 
@@ -115,7 +110,7 @@ export default function Nominations({
 					)}
 				</Box>
 			</Box>
-			{images && _renderResults(images, removeNomination)}
+			{images && _renderResults(images, removeLike)}
 		</Box>
 	)
 }

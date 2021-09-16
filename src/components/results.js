@@ -109,7 +109,7 @@ const useStyles = makeStyles((theme) => ({
 
 const _renderResults = (
 	images,
-	addNomination,
+	addLike,
 	checkIfIDExists,
 	loading,
 	max,
@@ -144,11 +144,11 @@ const _renderResults = (
 							action={
 								<IconButton
 									disabled={checkIfIDExists(image)}
-									onClick={() => addNomination(image)}
+									onClick={() => addLike(image)}
 								>
 									<FavoriteOutlined
 										className={
-											checkIfIDExists(image) ? null : classes.likeButton
+											checkIfIDExists(image) ? classes.likeButton : null
 										}
 									/>
 								</IconButton>
@@ -241,7 +241,7 @@ export default function Results({
 		setMax(event.target.value)
 	}
 
-	const addNomination = (image) => {
+	const addLike = (image) => {
 		onAdd(image)
 	}
 
@@ -266,7 +266,7 @@ export default function Results({
 			{images &&
 				_renderResults(
 					images,
-					addNomination,
+					addLike,
 					checkIfIDExists,
 					loading,
 					max,
